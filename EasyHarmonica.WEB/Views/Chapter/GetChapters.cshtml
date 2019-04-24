@@ -1,0 +1,23 @@
+﻿@using EasyHarmonica.WEB.Models
+@model EasyHarmonica.WEB.Models.StartViewModel
+
+@{
+    ViewBag.Title = "GetChapters";
+}
+
+<h2>GetChapters</h2>
+
+<div>
+    @foreach (var chapter in Model.Chapters)
+    {
+    <div>
+        @Html.DisplayFor(item => chapter.Name)
+    </div>
+    }
+</div>
+
+@Html.Partial("~/Views/Lesson/GetLessons.cshtml", new StartViewModel{Lessons = Model.Lessons})
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

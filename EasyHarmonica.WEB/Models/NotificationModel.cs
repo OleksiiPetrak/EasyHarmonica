@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using EasyHarmonica.DAL.Entities;
 
-namespace EasyHarmonica.BLL.DTO
+namespace EasyHarmonica.WEB.Models
 {
-    public class NotificationDTO
+    public class NotificationModel
     {
         public int Id { get; set; }
-
         public string Info { get; set; }
         public DateTime Date { get; set; }
-        public virtual ICollection<UserDTO> Users { get; set; }
+        public virtual ICollection<UserModel> Users { get; set; }
     }
 }

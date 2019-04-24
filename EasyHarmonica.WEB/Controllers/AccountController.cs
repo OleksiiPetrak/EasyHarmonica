@@ -48,7 +48,7 @@ namespace EasyHarmonica.WEB.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GetLessons", "Lesson");
                 }
             }
             return View(model);
@@ -57,7 +57,7 @@ namespace EasyHarmonica.WEB.Controllers
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         public ActionResult Register()
@@ -81,7 +81,7 @@ namespace EasyHarmonica.WEB.Controllers
                     Role = "User"
                 };
                 await UserService.Create(userDto);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetLessons", "Lesson");
             }
             return View(model);
         }

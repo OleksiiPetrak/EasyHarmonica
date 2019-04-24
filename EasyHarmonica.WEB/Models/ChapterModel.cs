@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace EasyHarmonica.BLL.DTO
+namespace EasyHarmonica.WEB.Models
 {
-    public class ChapterDTO
+    public class ChapterModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
         public string Info { get; set; }
-        public virtual ICollection<LessonDTO> Lessons { get; set; }
+        public virtual ICollection<LessonModel> Lessons { get; set; }
     }
 }

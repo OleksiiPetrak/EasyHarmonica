@@ -1,5 +1,4 @@
-﻿using EasyHarmonica.DAL.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EasyHarmonica.BLL.DTO
 {
@@ -11,8 +10,8 @@ namespace EasyHarmonica.BLL.DTO
         public string Info { get; set; }
         public string Tuner { get; set; }
 
-        public virtual ICollection<Achievement> Achievements { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<AchievementDTO> Achievements { get; set; }
+        public virtual ICollection<UserDTO> Users { get; set; }
 
         public int ChapterId { get; set; }
         public virtual ChapterDTO Chapter { get; set; }

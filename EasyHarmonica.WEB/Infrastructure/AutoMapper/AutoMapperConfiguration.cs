@@ -9,6 +9,8 @@ namespace EasyHarmonica.WEB.Infrastructure.AutoMapper
         {
             Mapper.Initialize(x =>
             {
+                x.AddProfile<ModelToDTOProfile>();
+                x.AddProfile<DTOToModelProfile>();
                 MapperProfilesBllInitializator.Initialize(x);
             });
         }

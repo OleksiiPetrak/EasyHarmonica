@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace EasyHarmonica.BLL.DTO
+namespace EasyHarmonica.WEB.Models
 {
-    public class AchievementDTO
+    public class AchievementModel
     {
         public int Id { get; set; }
 
@@ -14,8 +16,8 @@ namespace EasyHarmonica.BLL.DTO
         public bool Timeliness { get; set; }
 
         public int LessonId { get; set; }
-        public virtual LessonDTO Lesson { get; set; }
+        public virtual LessonModel Lesson { get; set; }
 
-        public virtual ICollection<UserDTO> Users { get; set; }
+        public virtual ICollection<UserModel> Users { get; set; }
     }
 }

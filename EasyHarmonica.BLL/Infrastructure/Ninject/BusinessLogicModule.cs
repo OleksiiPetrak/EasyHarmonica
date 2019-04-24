@@ -9,6 +9,10 @@ namespace EasyHarmonica.BLL.Infrastructure.Ninject
         public override void Load()
         {
             Bind<IUserService>().To<UserService>();
+            Bind<ILessonService>().To<LessonService>();
+            Bind<IAchievementService>().To<AchievementService>();
+            Bind<IChapterService>().To<ChapterService>();
+            Bind<INotificationService>().To<NotificationService>();
         }
     }
 }

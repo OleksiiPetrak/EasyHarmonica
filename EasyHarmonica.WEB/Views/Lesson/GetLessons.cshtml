@@ -1,0 +1,15 @@
+﻿@model EasyHarmonica.WEB.Models.StartViewModel
+
+<table>
+@foreach (var lesson in Model.Lessons)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(item => lesson.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(item=>lesson.Info)
+        </td>
+    </tr>
+}
+</table>
