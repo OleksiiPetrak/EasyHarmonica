@@ -39,23 +39,25 @@ namespace EasyHarmonica.BLL.Services
                 throw new ArgumentNullException($"Profile with such email does not exist. Id{email}");
             }
 
-            ClientProfileDTO clientProfileDto = Mapper.Map<ClientProfile, ClientProfileDTO>(clientProfile);
+            var clientProfileDto = Mapper.Map<ClientProfile, ClientProfileDTO>(clientProfile);
             return clientProfileDto;
         }
 
         public async Task EditClientProfile(ClientProfileDTO clientProfileDto)
         {
-            if (clientProfileDto != null)
-            {
-                var clientProfileEntity = Mapper.Map<ClientProfileDTO, ClientProfile>(clientProfileDto);
+            var checkUserProfile = _database.ClientProfiles.GetOne(x => x.Address == clientProfileDto.Address);
 
-                _database.ClientProfiles.Update(clientProfileEntity);
-                await _database.SaveAsync().ConfigureAwait(false);
-            }
-            else
+            if (checkUserProfile == null)
             {
                 throw new ArgumentNullException("Client profile is null");
             }
+
+            clientProfileDto.Id = checkUserProfile.Id;
+
+            var clientProfileEntity = Mapper.Map(clientProfileDto,checkUserProfile);
+
+            _database.ClientProfiles.Update(clientProfileEntity);
+            await _database.SaveAsync().ConfigureAwait(false);
         }
 
         public Task DeleteClientProfile(string id)

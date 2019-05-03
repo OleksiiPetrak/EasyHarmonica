@@ -4,6 +4,7 @@ using EasyHarmonica.BLL.Interfaces;
 using EasyHarmonica.WEB.Models;
 using System;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace EasyHarmonica.WEB.Controllers
@@ -31,8 +32,9 @@ namespace EasyHarmonica.WEB.Controllers
         }
 
         [HttpGet]
-        public ViewResult EditUserInfo(string email = "petrak@mail.com")
+        public ViewResult EditUserInfo(string email)
         {
+            email = User.Identity.Name;
             var clientProfileDto = _clientProfileService.GetClientProfile(email);
             if (clientProfileDto == null)
             {
@@ -44,18 +46,30 @@ namespace EasyHarmonica.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditUserInfo(ClientProfileModel clientProfile)
+        public async Task<ActionResult> EditUserInfo(ClientProfileModel clientProfile, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    clientProfile.ImageMimeType = image.ContentType;
+                    clientProfile.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(clientProfile.ImageData, 0, image.ContentLength);
+                }
                 var clientDto = Mapper.Map<ClientProfileModel, ClientProfileDTO>(clientProfile);
 
                 await _clientProfileService.EditClientProfile(clientDto).ConfigureAwait(false);
 
-                return RedirectToAction("GetUserInfo", new {email = User.Identity.Name});
+                return RedirectToAction("GetUserInfo", new { email = User.Identity.Name });
             }
 
             return View(clientProfile);
+        }
+
+        public FileContentResult GetImage(string email)
+        {
+            var clientProfile = _clientProfileService.GetClientProfile(email);
+            return clientProfile.ImageMimeType != null ? File(clientProfile.ImageData, clientProfile.ImageMimeType) : null;
         }
     }
 }

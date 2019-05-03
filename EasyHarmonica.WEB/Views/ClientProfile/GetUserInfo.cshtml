@@ -7,8 +7,13 @@
 <h2>GetUserInfo</h2>
 
 <div>
-    <h4>ClientProfileModel</h4>
-    <hr />
+    @if (Model.ImageData != null)
+    {
+        <div style="margin-right: 20px">
+            <img width="150" height="150" src="@Url.Action("GetImage", "ClientProfile", new {email = User.Identity.Name})"/>
+        </div>
+    }
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -53,6 +58,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "EditUserInfo", new { email = User.Identity.Name }) 
 </p>
