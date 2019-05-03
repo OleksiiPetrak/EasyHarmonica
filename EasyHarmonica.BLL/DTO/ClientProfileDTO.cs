@@ -1,32 +1,22 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using EasyHarmonica.Common.Enums;
+using System;
 using System.Web.Mvc;
-using EasyHarmonica.Common.Enums;
 
-namespace EasyHarmonica.DAL.Entities
+namespace EasyHarmonica.BLL.DTO
 {
-    public class ClientProfile
+    public class ClientProfileDTO
     {
-        [Key]
-        [ForeignKey("User")]
         public string Id { get; set; }
-
         public string Name { get; set; }
-
         public string Address { get; set; }
-
         public DateTime BirthDay { get; set; }
-
         public string City { get; set; }
-
         public CourseComplexity CourseComplexity { get; set; }
-
         public byte[] ImageData { get; set; }
 
-        [HiddenInput(DisplayValue=false)]
+        [HiddenInput(DisplayValue = false)]
         public string ImageMimeType { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual UserDTO User { get; set; }
     }
 }

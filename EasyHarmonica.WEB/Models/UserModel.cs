@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web.Mvc;
 
 namespace EasyHarmonica.WEB.Models
 {
@@ -14,5 +11,9 @@ namespace EasyHarmonica.WEB.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string Role { get; set; }
+        public byte[] ImageData { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public string ImageMimeType { get; set; }
     }
 }

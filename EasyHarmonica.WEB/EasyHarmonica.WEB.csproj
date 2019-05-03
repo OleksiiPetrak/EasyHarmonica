@@ -171,7 +171,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChapterController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ClientProfileController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -181,6 +181,7 @@
     <Compile Include="Infrastructure\AutoMapper\ModelToDTOProfile.cs" />
     <Compile Include="Models\AchievementModel.cs" />
     <Compile Include="Models\ChapterModel.cs" />
+    <Compile Include="Models\ClientProfileModel.cs" />
     <Compile Include="Models\LessonModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
@@ -222,16 +223,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Lesson\GetLessons.cshtml" />
     <Content Include="Views\Chapter\GetChapters.cshtml" />
+    <Content Include="Views\ClientProfile\GetUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -250,6 +250,10 @@
     <ProjectReference Include="..\EasyHarmonica.BLL\EasyHarmonica.BLL.csproj">
       <Project>{c6e8a496-4fb3-4777-89db-c83c09f0d291}</Project>
       <Name>EasyHarmonica.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EasyHarmonica.Common\EasyHarmonica.Common.csproj">
+      <Project>{0C7510FF-A401-422A-9CFD-981040192021}</Project>
+      <Name>EasyHarmonica.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

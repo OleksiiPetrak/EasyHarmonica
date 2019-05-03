@@ -9,6 +9,7 @@ namespace EasyHarmonica.BLL.Infrastructure.AutoMapper
         public DTOToEntityProfile()
         {
             CreateMap<UserDTO, User>();
+            CreateMap<ClientProfileDTO, ClientProfile>();
             CreateMap<AchievementDTO, Achievement>();
             CreateMap<ChapterDTO, Chapter>();
             CreateMap<LessonDTO, Lesson>();

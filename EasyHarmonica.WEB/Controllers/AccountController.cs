@@ -48,7 +48,7 @@ namespace EasyHarmonica.WEB.Controllers
                     {
                         IsPersistent = true
                     }, claim);
-                    return RedirectToAction("GetLessons", "Lesson");
+                    return RedirectToAction("GetChapters", "Chapter");
                 }
             }
             return View(model);
@@ -76,12 +76,12 @@ namespace EasyHarmonica.WEB.Controllers
                 {
                     Email = model.Email,
                     Password = model.Password,
-                    Address = model.Address,
+                    City = model.City,
                     Name = model.Name,
                     Role = "User"
                 };
                 await UserService.Create(userDto);
-                return RedirectToAction("GetLessons", "Lesson");
+                return RedirectToAction("GetChapters", "Chapter");
             }
             return View(model);
         }
@@ -95,7 +95,7 @@ namespace EasyHarmonica.WEB.Controllers
                 UserName = "somemail@mail.ru",
                 Password = "ad46D_ewr3",
                 Name = "Семен Семенович Горбунков",
-                Address = "ул. Спортивная, д.30, кв.75",
+                City = "Kharkiv",
                 Role = "admin",
             }, new List<string> { "user", "admin" });
         }

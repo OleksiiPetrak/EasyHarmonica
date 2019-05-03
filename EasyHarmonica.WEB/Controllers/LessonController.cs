@@ -16,18 +16,14 @@ namespace EasyHarmonica.WEB.Controllers
             _lessonService = lessonService;
         }
 
+        [HttpGet]
         public ActionResult GetLessons()
-        {
-            
-                var lessonsDto = _lessonService.GetAllLessons();
+        {        
+             var lessonsDto = _lessonService.GetAllLessons();
+             var results = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
+             var startModel = new StartViewModel() {Lessons = results};
 
-
-                var results = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
-
-                var startModel = new StartViewModel() {Lessons = results};
-
-                return PartialView(startModel);
-            
+             return PartialView(startModel);   
         }
     }
 }

@@ -14,8 +14,8 @@ namespace EasyHarmonica.WEB.Models
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string Address { get; set; }
+        
+        public string City { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

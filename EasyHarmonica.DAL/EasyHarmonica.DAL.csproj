@@ -104,6 +104,10 @@
     <Compile Include="Migrations\201903281052190_InitialMigration.Designer.cs">
       <DependentUpon>201903281052190_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904300841501_ImagesFields.cs" />
+    <Compile Include="Migrations\201904300841501_ImagesFields.Designer.cs">
+      <DependentUpon>201904300841501_ImagesFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +127,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903281052190_InitialMigration.resx">
       <DependentUpon>201903281052190_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904300841501_ImagesFields.resx">
+      <DependentUpon>201904300841501_ImagesFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

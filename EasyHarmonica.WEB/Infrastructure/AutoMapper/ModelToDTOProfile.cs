@@ -9,10 +9,11 @@ namespace EasyHarmonica.WEB.Infrastructure.AutoMapper
         public ModelToDTOProfile()
         {
             CreateMap<AchievementModel, AchievementDTO>();
+            CreateMap<UserModel, UserDTO>();
+            CreateMap<ClientProfileModel, ClientProfileDTO>();
             CreateMap<ChapterModel, ChapterDTO>();
             CreateMap<LessonModel, LessonDTO>();
             CreateMap<NotificationModel, NotificationDTO>();
-            CreateMap<UserModel, UserDTO>();
         }
 
         public override string ProfileName => "ModelToDTO";
