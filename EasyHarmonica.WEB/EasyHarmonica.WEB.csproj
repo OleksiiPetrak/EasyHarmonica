@@ -228,6 +228,7 @@
     <Content Include="Views\Lesson\GetLessons.cshtml" />
     <Content Include="Views\Chapter\GetChapters.cshtml" />
     <Content Include="Views\ClientProfile\GetUserInfo.cshtml" />
+    <Content Include="Views\ClientProfile\EditUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

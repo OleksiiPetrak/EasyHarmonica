@@ -43,9 +43,19 @@ namespace EasyHarmonica.BLL.Services
             return clientProfileDto;
         }
 
-        public Task EditClientProfile(ClientProfileDTO clientProfileDto)
+        public async Task EditClientProfile(ClientProfileDTO clientProfileDto)
         {
-            throw new NotImplementedException();
+            if (clientProfileDto != null)
+            {
+                var clientProfileEntity = Mapper.Map<ClientProfileDTO, ClientProfile>(clientProfileDto);
+
+                _database.ClientProfiles.Update(clientProfileEntity);
+                await _database.SaveAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ArgumentNullException("Client profile is null");
+            }
         }
 
         public Task DeleteClientProfile(string id)
