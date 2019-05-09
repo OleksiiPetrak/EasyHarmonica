@@ -10,14 +10,15 @@
 <div>
     @foreach (var chapter in Model.Chapters)
     {
-    <div>
-        @Html.DisplayFor(item => chapter.Name)
-    </div>
+        <div>
+            @Html.DisplayFor(item => chapter.Name)
+        </div>
     }
 </div>
+
+<hr/>
 
 @Html.Partial("~/Views/Lesson/GetLessons.cshtml", new StartViewModel{Lessons = Model.Lessons})
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
 </p>

@@ -10,6 +10,9 @@
         <td>
             @Html.DisplayFor(item=>lesson.Info)
         </td>
+        <td>
+            @Html.ActionLink("Edit", "EditLesson", "Lesson", new{name = lesson.Name}, null)
+        </td>
     </tr>
 }
 </table>

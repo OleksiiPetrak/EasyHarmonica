@@ -26,7 +26,7 @@ namespace EasyHarmonica.BLL.Services
                 throw new ArgumentNullException("Input cannot be empty");
             }
 
-            Lesson lesson = Mapper.Map<LessonDTO, Lesson>(lessonDto);
+            var lesson = Mapper.Map<LessonDTO, Lesson>(lessonDto);
 
             _database.Lessons.Create(lesson);
             await _database.SaveAsync();
@@ -36,27 +36,27 @@ namespace EasyHarmonica.BLL.Services
         {
             IEnumerable<Lesson> lessons = _database.Lessons.GetAll().ToList();
 
-            IEnumerable<LessonDTO> lessonDtos = Mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDTO>>(lessons);
+            var lessonDtos = Mapper.Map<IEnumerable<Lesson>, IEnumerable<LessonDTO>>(lessons);
 
             return lessonDtos;
         }
 
         public LessonDTO GetLesson(string lessonName)
         {
-            Lesson lesson = _database.Lessons.GetOne(x => x.Name == lessonName);
+            var lesson = _database.Lessons.GetOne(x => x.Name == lessonName);
 
             if (lesson == null)
             {
                 throw new ArgumentNullException($"Lesson with such name does not exist. Name: {lessonName}");
             }
 
-            LessonDTO lessonDto = Mapper.Map<Lesson, LessonDTO>(lesson);
+            var lessonDto = Mapper.Map<Lesson, LessonDTO>(lesson);
             return lessonDto;
         }
 
         public async Task EditLesson(LessonDTO lessonDto)
         {
-            Lesson checkLesson = _database.Lessons.GetOne(x => x.Id == lessonDto.Id);
+            var checkLesson = _database.Lessons.GetOne(x => x.Id == lessonDto.Id);
             if (checkLesson == null)
             {
                 throw new ArgumentNullException("Lesson does not exist");
@@ -64,15 +64,17 @@ namespace EasyHarmonica.BLL.Services
 
             lessonDto.Id = checkLesson.Id;
 
-            Lesson lesson = Mapper.Map<LessonDTO, Lesson>(lessonDto);
+            var lesson = Mapper.Map(lessonDto,checkLesson);
+
+            lesson.Chapter = _database.Chapters.GetOne(x => x.Id == lessonDto.ChapterId);
 
             _database.Lessons.Update(lesson);
-            await _database.SaveAsync();
+            await _database.SaveAsync().ConfigureAwait(false);
         }
 
         public async Task DeleteLesson(int id)
         {
-            Lesson lesson = _database.Lessons.Get(id);
+            var lesson = _database.Lessons.Get(id);
             if (lesson == null)
             {
                 throw new ArgumentNullException($"Chapter with id does not exist. Id: {id} ");

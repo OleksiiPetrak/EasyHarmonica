@@ -182,6 +182,7 @@
     <Compile Include="Models\AchievementModel.cs" />
     <Compile Include="Models\ChapterModel.cs" />
     <Compile Include="Models\ClientProfileModel.cs" />
+    <Compile Include="Models\CreateLessonModel.cs" />
     <Compile Include="Models\LessonModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NotificationModel.cs" />
@@ -229,6 +230,7 @@
     <Content Include="Views\Chapter\GetChapters.cshtml" />
     <Content Include="Views\ClientProfile\GetUserInfo.cshtml" />
     <Content Include="Views\ClientProfile\EditUserInfo.cshtml" />
+    <Content Include="Views\Lesson\EditLesson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
