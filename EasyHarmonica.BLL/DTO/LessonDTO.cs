@@ -22,6 +22,7 @@ namespace EasyHarmonica.BLL.DTO
         public IEnumerable<string> UsersEmails { get; set; }
         public virtual ICollection<UserDTO> Users { get; set; }
 
+        public string ChapterName { get; set; }
         public int ChapterId { get; set; }
         public virtual ChapterDTO Chapter { get; set; }
     }

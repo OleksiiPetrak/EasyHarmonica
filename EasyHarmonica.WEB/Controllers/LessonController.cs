@@ -12,10 +12,17 @@ namespace EasyHarmonica.WEB.Controllers
     public class LessonController : Controller
     {
         private readonly ILessonService _lessonService;
-
-        public LessonController(ILessonService lessonService)
+        private readonly IUserService _userService;
+        private readonly IAchievementService _achievementService;
+        private readonly IChapterService _chapterService;
+        
+        public LessonController(ILessonService lessonService, IUserService userService,
+            IAchievementService achievementService, IChapterService chapterService)
         {
             _lessonService = lessonService;
+            _userService = userService;
+            _achievementService = achievementService;
+            _chapterService = chapterService;
         }
 
         [HttpGet]
@@ -28,18 +35,47 @@ namespace EasyHarmonica.WEB.Controllers
              return PartialView(startModel);   
         }
 
+        //[HttpGet]
+        //public ViewResult EditLesson(string name)
+        //{
+        //    var lessonDto = _lessonService.GetLesson(name);
+
+        //    var lesson = Mapper.Map<LessonDTO, LessonModel>(lessonDto);
+
+        //    return View(lesson);
+        //}
+
         [HttpGet]
         public ViewResult EditLesson(string name)
         {
             var lessonDto = _lessonService.GetLesson(name);
 
-            var lesson = Mapper.Map<LessonDTO, LessonModel>(lessonDto);
+            var lesson = Mapper.Map<LessonDTO, CreateLessonModel>(lessonDto);
 
-            return View(lesson);
+            var usersEmails = new List<string>();
+            var achievementsNames = new List<string>();
+
+            foreach (var user in lessonDto.Users)
+            {
+                usersEmails.Add(user.Email);
+            }
+
+            lesson.UsersEmails = usersEmails;
+
+            foreach (var achievement in lessonDto.Achievements)
+            {
+                achievementsNames.Add(achievement.Name);
+            }
+
+            lesson.AchievementsNames = achievementsNames;
+
+            var result = InitializeCreateLessonModel(lesson);
+
+            return View(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditLesson(LessonModel lesson, HttpPostedFileBase image)
+        public async Task<ActionResult> EditLesson(CreateLessonModel lesson, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -50,13 +86,26 @@ namespace EasyHarmonica.WEB.Controllers
                     image.InputStream.Read(lesson.ImageData, 0, image.ContentLength);
                 }
 
-                var lessonDto = Mapper.Map<LessonModel, LessonDTO>(lesson);
+                var lessonDto = Mapper.Map<CreateLessonModel, LessonDTO>(lesson);
                 await _lessonService.EditLesson(lessonDto).ConfigureAwait(false);
 
                 return RedirectToAction("GetChapters", "Chapter");
             }
 
             return View(lesson);
+        }
+
+        private CreateLessonModel InitializeCreateLessonModel(CreateLessonModel model)
+        {
+            var userDtos = _userService.GetAllUsers();
+            var achievementDtos = _achievementService.GetAllAchievements();
+            var chaptersDtos = _chapterService.GetAllChapters();
+            
+            model.Users = new MultiSelectList(userDtos, "Email", "Email");
+            model.Achievements = new MultiSelectList(achievementDtos, "Name", "Name");
+            model.Chapter = new SelectList(chaptersDtos, "Name", "Name");
+
+            return model;
         }
 
         public FileContentResult GetImage(string name)

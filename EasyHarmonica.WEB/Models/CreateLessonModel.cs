@@ -24,7 +24,7 @@ namespace EasyHarmonica.WEB.Models
 
         public MultiSelectList Users { get; set; }
 
-        public int ChapterId { get; set; }
+        public string ChapterName { get; set; }
         public SelectList Chapter { get; set; }
     }
 }

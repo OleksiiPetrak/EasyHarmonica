@@ -12,6 +12,10 @@ namespace EasyHarmonica.WEB.Infrastructure.AutoMapper
             CreateMap<UserDTO, UserModel>();
             CreateMap<ClientProfileDTO, ClientProfileModel>();
             CreateMap<ChapterDTO, ChapterModel>();
+            CreateMap<LessonDTO, CreateLessonModel>()
+                .ForMember(x => x.Achievements, opt => opt.Ignore())
+                .ForMember(x => x.Users, opt => opt.Ignore())
+                .ForMember(x => x.Chapter, opt => opt.Ignore());
             CreateMap<LessonDTO, LessonModel>();
             CreateMap<NotificationDTO, NotificationModel>();
         }
