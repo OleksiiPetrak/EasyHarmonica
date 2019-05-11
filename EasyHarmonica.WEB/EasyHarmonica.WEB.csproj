@@ -232,6 +232,7 @@
     <Content Include="Views\ClientProfile\GetUserInfo.cshtml" />
     <Content Include="Views\ClientProfile\EditUserInfo.cshtml" />
     <Content Include="Views\Lesson\EditLesson.cshtml" />
+    <Content Include="Views\Chapter\EditChapter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

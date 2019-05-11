@@ -5,20 +5,20 @@
     ViewBag.Title = "GetChapters";
 }
 
-<h2>GetChapters</h2>
+<h2>It's time to music!</h2>
 
 <div>
     @foreach (var chapter in Model.Chapters)
     {
-        <div>
+        <span>
             @Html.DisplayFor(item => chapter.Name)
-        </div>
+        </span>
+        <span>
+                @Html.ActionLink("Edit", "EditChapter", "Chapter", new { chapterName = chapter.Name }, null)
+        </span>
     }
 </div>
 
 <hr/>
 
 @Html.Partial("~/Views/Lesson/GetLessons.cshtml", new StartViewModel{Lessons = Model.Lessons})
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-</p>

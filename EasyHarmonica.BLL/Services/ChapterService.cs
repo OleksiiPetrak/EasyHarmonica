@@ -26,7 +26,7 @@ namespace EasyHarmonica.BLL.Services
                 throw new ArgumentNullException("Input cannot be empty");
             }
 
-            Chapter chapter = Mapper.Map<ChapterDTO, Chapter>(chapterDto);
+            var chapter = Mapper.Map<ChapterDTO, Chapter>(chapterDto);
 
             _database.Chapters.Create(chapter);
             await _database.SaveAsync();
@@ -43,20 +43,20 @@ namespace EasyHarmonica.BLL.Services
 
         public ChapterDTO GetChapter(string chapterName)
         {
-            Chapter chapter = _database.Chapters.GetOne(x => x.Name == chapterName);
+            var chapter = _database.Chapters.GetOne(x => x.Name == chapterName);
 
             if (chapter == null)
             {
                 throw new ArgumentNullException($"Chapter with such name does not exist. Name: {chapterName}");
             }
 
-            ChapterDTO chapterDto = Mapper.Map<Chapter, ChapterDTO>(chapter);
+            var chapterDto = Mapper.Map<Chapter, ChapterDTO>(chapter);
             return chapterDto;
         }
 
         public async Task EditChapter(ChapterDTO chapterDto)
         {
-            Chapter checkChapter = _database.Chapters.GetOne(x => x.Id == chapterDto.Id);
+            var checkChapter = _database.Chapters.GetOne(x => x.Id == chapterDto.Id);
             if (checkChapter == null)
             {
                 throw new ArgumentNullException("Chapter does not exist");
@@ -64,7 +64,9 @@ namespace EasyHarmonica.BLL.Services
 
             chapterDto.Id = checkChapter.Id;
 
-            Chapter chapter = Mapper.Map<ChapterDTO, Chapter>(chapterDto);
+            var chapter = Mapper.Map(chapterDto, checkChapter);
+
+            chapter.Lessons = _database.Lessons.Find(x => chapterDto.LessonsNames.Contains(x.Name)).ToList();
 
             _database.Chapters.Update(chapter);
             await _database.SaveAsync();
@@ -72,7 +74,7 @@ namespace EasyHarmonica.BLL.Services
 
         public async Task DeleteChapter(int id)
         {
-            Chapter chapter = _database.Chapters.Get(id);
+            var chapter = _database.Chapters.Get(id);
             if (chapter == null)
             {
                 throw new ArgumentNullException($"Chapter with id does not exist. Id: {id} ");

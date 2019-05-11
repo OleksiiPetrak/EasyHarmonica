@@ -35,16 +35,6 @@ namespace EasyHarmonica.WEB.Controllers
              return PartialView(startModel);   
         }
 
-        //[HttpGet]
-        //public ViewResult EditLesson(string name)
-        //{
-        //    var lessonDto = _lessonService.GetLesson(name);
-
-        //    var lesson = Mapper.Map<LessonDTO, LessonModel>(lessonDto);
-
-        //    return View(lesson);
-        //}
-
         [HttpGet]
         public ViewResult EditLesson(string name)
         {
