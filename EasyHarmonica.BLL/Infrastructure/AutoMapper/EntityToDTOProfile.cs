@@ -11,7 +11,8 @@ namespace EasyHarmonica.BLL.Infrastructure.AutoMapper
             CreateMap<User, UserDTO>();
             CreateMap<ClientProfile, ClientProfileDTO>();
             CreateMap<Achievement, AchievementDTO>();
-            CreateMap<Chapter, ChapterDTO>();
+            CreateMap<Chapter, ChapterDTO>()
+                .ForMember(x => x.LessonsNames, opt => opt.Ignore());
             CreateMap<Lesson, LessonDTO>();
             CreateMap<Notification, NotificationDTO>();
         }

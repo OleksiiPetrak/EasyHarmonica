@@ -28,12 +28,25 @@ namespace EasyHarmonica.WEB.Controllers
                 var lessonsDto = _lessonService.GetAllLessons();
                 var lessonsModel = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
 
-                var startModel = new StartViewModel() { Chapters = chaptersModel, Lessons = lessonsModel};
+                var startModel = new StartViewModel() { Chapters = chaptersModel, Lessons = lessonsModel };
 
                 return View(startModel);
             }
 
             return RedirectToAction("Login", "Account");
         }
+
+        [HttpGet]
+        public ViewResult EditChapter(string chapterName)
+        {
+            var chapterDto = _chapterService.GetChapter(chapterName);
+
+            var chapter = Mapper.Map<ChapterDTO, ChapterModel>(chapterDto);
+
+            return View(chapter);
+        }
+
+        [HttpPost]
+        public ActionResult EditChapter()
     }
 }

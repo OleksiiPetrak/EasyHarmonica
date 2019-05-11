@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace EasyHarmonica.BLL.DTO
+namespace EasyHarmonica.WEB.Models
 {
-    public class ChapterDTO
+    public class CreateChapterModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,6 +16,6 @@ namespace EasyHarmonica.BLL.DTO
         public string Info { get; set; }
 
         public List<string> LessonsNames { get; set; }
-        public virtual ICollection<LessonDTO> Lessons { get; set; }
+        public MultiSelectList Lessons { get; set; }
     }
 }
