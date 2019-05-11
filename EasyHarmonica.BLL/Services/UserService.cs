@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 
 namespace EasyHarmonica.BLL.Services
@@ -18,6 +19,15 @@ namespace EasyHarmonica.BLL.Services
         public UserService(IUnitOfWork unitOfWork)
         {
             _database = unitOfWork;
+        }
+
+        public IEnumerable<UserDTO> GetAllUsers()
+        {
+            List<User> users = _database.UserManager.Users.ToList();
+
+            var result = Mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
+
+            return result;
         }
 
         public async Task Create(UserDTO userDto)

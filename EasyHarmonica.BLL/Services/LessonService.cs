@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace EasyHarmonica.BLL.Services
 {
@@ -66,7 +67,12 @@ namespace EasyHarmonica.BLL.Services
 
             var lesson = Mapper.Map(lessonDto,checkLesson);
 
-            lesson.Chapter = _database.Chapters.GetOne(x => x.Id == lessonDto.ChapterId);
+            lesson.Chapter = _database.Chapters.GetOne(x => x.Name == lessonDto.ChapterName);
+
+            lesson.Users = _database.UserManager.Users.Where(x => lessonDto.UsersEmails.Contains(x.Email)).ToList();
+
+            lesson.Achievements =
+                _database.Achievements.Find(x => lessonDto.AchievementsNames.Contains(x.Name)).ToList();
 
             _database.Lessons.Update(lesson);
             await _database.SaveAsync().ConfigureAwait(false);
