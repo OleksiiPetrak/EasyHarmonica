@@ -108,6 +108,14 @@
     <Compile Include="Migrations\201904300841501_ImagesFields.Designer.cs">
       <DependentUpon>201904300841501_ImagesFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905111239096_LessonWithoutChapter.cs" />
+    <Compile Include="Migrations\201905111239096_LessonWithoutChapter.Designer.cs">
+      <DependentUpon>201905111239096_LessonWithoutChapter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905111247354_LessonRequireChapter.cs" />
+    <Compile Include="Migrations\201905111247354_LessonRequireChapter.Designer.cs">
+      <DependentUpon>201905111247354_LessonRequireChapter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904300841501_ImagesFields.resx">
       <DependentUpon>201904300841501_ImagesFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905111239096_LessonWithoutChapter.resx">
+      <DependentUpon>201905111239096_LessonWithoutChapter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905111247354_LessonRequireChapter.resx">
+      <DependentUpon>201905111247354_LessonRequireChapter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

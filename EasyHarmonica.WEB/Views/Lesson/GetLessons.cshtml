@@ -5,7 +5,7 @@
 {
     <tr>
         <td>
-            @Html.DisplayFor(item => lesson.Name)
+            @Html.ActionLink(lesson.Name, "GetLesson", "Lesson", new { name = lesson.Name }, null)
         </td>
         <td>
             @Html.DisplayFor(item=>lesson.Info)

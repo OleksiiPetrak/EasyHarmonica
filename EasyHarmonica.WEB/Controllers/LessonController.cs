@@ -15,7 +15,7 @@ namespace EasyHarmonica.WEB.Controllers
         private readonly IUserService _userService;
         private readonly IAchievementService _achievementService;
         private readonly IChapterService _chapterService;
-        
+
         public LessonController(ILessonService lessonService, IUserService userService,
             IAchievementService achievementService, IChapterService chapterService)
         {
@@ -27,12 +27,21 @@ namespace EasyHarmonica.WEB.Controllers
 
         [HttpGet]
         public ActionResult GetLessons()
-        {        
-             var lessonsDto = _lessonService.GetAllLessons();
-             var results = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
-             var startModel = new StartViewModel() {Lessons = results};
+        {
+            var lessonsDto = _lessonService.GetAllLessons();
+            var results = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
+            var startModel = new StartViewModel() { Lessons = results };
 
-             return PartialView(startModel);   
+            return PartialView(startModel);
+        }
+
+        [HttpGet]
+        public ViewResult GetLesson(string name)
+        {
+            var lessonDto = _lessonService.GetLesson(name);
+            var result = Mapper.Map<LessonDTO, LessonModel>(lessonDto);
+
+            return View(result);
         }
 
         [HttpGet]

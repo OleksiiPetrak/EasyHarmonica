@@ -1,0 +1,39 @@
+﻿@model EasyHarmonica.WEB.Models.LessonModel
+
+@{
+    ViewBag.Title = "GetLesson";
+}
+
+<div>
+   <div style="float:left">
+    @if (Model.ImageData != null)
+    {
+        <div style="margin-right: 20px">
+            <img width="150" height="150" src="@Url.Action("GetImage", "Lesson", new {name = Model.Name})" />
+        </div>
+    }
+    </div>
+   <div>
+       <b>
+           @Html.DisplayFor(model => model.Name)
+       </b>
+   </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+
+        <dt>
+            @Html.Display("Try yourself: ")
+        </dt>
+
+        <dd>
+            <a href=@Html.DisplayFor(model => model.Tuner)> @Html.DisplayFor(model => model.Tuner) </a>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "GetChapters", "Chapter") |
+    @Html.ActionLink("Edit", "EditLesson", "Lesson", new { name = Model.Name }, null)
+</p>
