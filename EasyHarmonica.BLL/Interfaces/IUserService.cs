@@ -7,7 +7,8 @@ namespace EasyHarmonica.BLL.Interfaces
 {
     public interface IUserService
     {
-        IEnumerable<UserDTO> GetAllUsers();
+        Task<IEnumerable<UserDTO>> GetAllUsers();
+        Task<UserDTO> GetUser(string email);
         Task Create(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);

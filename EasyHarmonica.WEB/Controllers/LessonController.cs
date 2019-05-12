@@ -15,14 +15,16 @@ namespace EasyHarmonica.WEB.Controllers
         private readonly IUserService _userService;
         private readonly IAchievementService _achievementService;
         private readonly IChapterService _chapterService;
+        private readonly IClientProfileService _clientProfileService;
 
         public LessonController(ILessonService lessonService, IUserService userService,
-            IAchievementService achievementService, IChapterService chapterService)
+            IAchievementService achievementService, IChapterService chapterService, IClientProfileService clientProfileService)
         {
             _lessonService = lessonService;
             _userService = userService;
             _achievementService = achievementService;
             _chapterService = chapterService;
+            _clientProfileService = clientProfileService;
         }
 
         [HttpGet]
@@ -44,8 +46,30 @@ namespace EasyHarmonica.WEB.Controllers
             return View(result);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> GetLesson(LessonModel model)
+        {
+            var lessonsCount = _lessonService.GetLessonsCount();
+            double percent = 100 / lessonsCount;
+
+            var  email = User.Identity.Name;
+            var clientProfileDto = _clientProfileService.GetClientProfile(email);
+            clientProfileDto.Progress += percent;
+
+            await _clientProfileService.EditClientProfile(clientProfileDto).ConfigureAwait(false);
+
+            return RedirectToAction("GetNextLessonName", new { id = model.Id });
+        }
+
         [HttpGet]
-        public ViewResult EditLesson(string name)
+        public ActionResult GetNextLessonName(int id)
+        {
+            var lessonName = _lessonService.GetNextLessonName(id);
+            return RedirectToAction("GetLesson", new { name = lessonName });
+        }
+
+        [HttpGet]
+        public async Task<ViewResult> EditLesson(string name)
         {
             var lessonDto = _lessonService.GetLesson(name);
 
@@ -68,7 +92,7 @@ namespace EasyHarmonica.WEB.Controllers
 
             lesson.AchievementsNames = achievementsNames;
 
-            var result = InitializeCreateLessonModel(lesson);
+            var result = await InitializeCreateLessonModel(lesson);
 
             return View(result);
         }
@@ -94,9 +118,9 @@ namespace EasyHarmonica.WEB.Controllers
             return View(lesson);
         }
 
-        private CreateLessonModel InitializeCreateLessonModel(CreateLessonModel model)
+        private async Task<CreateLessonModel> InitializeCreateLessonModel(CreateLessonModel model)
         {
-            var userDtos = _userService.GetAllUsers();
+            var userDtos = await _userService.GetAllUsers();
             var achievementDtos = _achievementService.GetAllAchievements();
             var chaptersDtos = _chapterService.GetAllChapters();
             

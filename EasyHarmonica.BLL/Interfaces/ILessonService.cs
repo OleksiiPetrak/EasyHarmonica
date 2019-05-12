@@ -9,7 +9,9 @@ namespace EasyHarmonica.BLL.Interfaces
         Task CreateLesson(LessonDTO lessonDto);
         IEnumerable<LessonDTO> GetAllLessons();
         LessonDTO GetLesson(string lessonName);
+        string GetNextLessonName(int id);
         Task EditLesson(LessonDTO lessonDto);
         Task DeleteLesson(int id);
+        int GetLessonsCount();
     }
 }

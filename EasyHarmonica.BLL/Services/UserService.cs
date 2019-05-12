@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace EasyHarmonica.BLL.Services
 {
@@ -21,11 +22,25 @@ namespace EasyHarmonica.BLL.Services
             _database = unitOfWork;
         }
 
-        public IEnumerable<UserDTO> GetAllUsers()
+        public async Task<IEnumerable<UserDTO>> GetAllUsers()
         {
-            List<User> users = _database.UserManager.Users.ToList();
+            List<User> users = await _database.UserManager.Users.ToListAsync();
 
             var result = Mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(users);
+
+            return result;
+        }
+
+        public async Task<UserDTO> GetUser(string email)
+        {
+            User user = await _database.UserManager.FindByEmailAsync(email);
+
+            if(user == null)
+            {
+                throw new ArgumentNullException($"User with email {email} does not exist");
+            }
+
+            var result = Mapper.Map<User, UserDTO>(user);
 
             return result;
         }

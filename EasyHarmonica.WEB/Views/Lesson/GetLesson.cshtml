@@ -4,35 +4,48 @@
     ViewBag.Title = "GetLesson";
 }
 
-<div>
-   <div style="float:left">
-    @if (Model.ImageData != null)
-    {
-        <div style="margin-right: 20px">
-            <img width="150" height="150" src="@Url.Action("GetImage", "Lesson", new {name = Model.Name})" />
+@using (Html.BeginForm())
+{
+    <div>
+        <div style="float:left">
+            @if (Model.ImageData != null)
+            {
+                <div style="margin-right: 20px">
+                    <img width="150" height="150" src="@Url.Action("GetImage", "Lesson", new { name = Model.Name })" />
+                </div>
+            }
         </div>
-    }
+        @Html.HiddenFor(model => model.Id)
+        <div>
+            <b>
+                @Html.DisplayFor(model => model.Name)
+            </b>
+        </div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(model => model.Info)
+            </dd>
+
+            <dt>
+                @Html.Display("Try yourself: ")
+            </dt>
+
+            <dd>
+                <a href=@Html.DisplayFor(model => model.Tuner)> @Html.DisplayFor(model => model.Tuner) </a>
+            </dd>
+
+            <dd>
+                <input type="submit" value="Finish" class="btn btn-default" />
+            </dd>
+        </dl>
     </div>
-   <div>
-       <b>
-           @Html.DisplayFor(model => model.Name)
-       </b>
-   </div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dd>
-            @Html.DisplayFor(model => model.Info)
-        </dd>
 
-        <dt>
-            @Html.Display("Try yourself: ")
-        </dt>
+    <hr/>
 
-        <dd>
-            <a href=@Html.DisplayFor(model => model.Tuner)> @Html.DisplayFor(model => model.Tuner) </a>
-        </dd>
-    </dl>
-</div>
+    <span>@Html.ActionLink("To previous lesson", "GetNextLessonName", "Lesson", new { id = Model.Id - 2 }, null)</span>
+    <span>@Html.ActionLink("To next lesson", "GetNextLessonName", "Lesson", new { id = Model.Id }, null)</span>
+}
 <p>
     @Html.ActionLink("Back to List", "GetChapters", "Chapter") |
     @Html.ActionLink("Edit", "EditLesson", "Lesson", new { name = Model.Name }, null)

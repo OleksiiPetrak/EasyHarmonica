@@ -55,6 +55,19 @@ namespace EasyHarmonica.BLL.Services
             return lessonDto;
         }
 
+        public string GetNextLessonName(int id)
+        {
+            int nextLessonId = id + 1;
+            var lesson = _database.Lessons.Get(nextLessonId);
+
+            if (lesson == null)
+            {
+                throw new ArgumentNullException($"Lesson with such id does not exist. Name: {id}");
+            }
+
+            return lesson.Name;
+        }
+
         public async Task EditLesson(LessonDTO lessonDto)
         {
             var checkLesson = _database.Lessons.GetOne(x => x.Id == lessonDto.Id);
@@ -88,6 +101,12 @@ namespace EasyHarmonica.BLL.Services
 
             _database.Lessons.Delete(lesson);
             await _database.SaveAsync();
+        }
+
+        public int GetLessonsCount()
+        {
+            var count = _database.Lessons.GetAll().Count();
+            return count;
         }
     }
 }

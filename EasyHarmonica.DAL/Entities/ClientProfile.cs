@@ -20,6 +20,8 @@ namespace EasyHarmonica.DAL.Entities
 
         public string City { get; set; }
 
+        public double Progress { get; set; }
+
         public CourseComplexity CourseComplexity { get; set; }
 
         public byte[] ImageData { get; set; }

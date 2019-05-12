@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201905111247354_LessonRequireChapter.Designer.cs">
       <DependentUpon>201905111247354_LessonRequireChapter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905120732393_AddProgressToClientProfile.cs" />
+    <Compile Include="Migrations\201905120732393_AddProgressToClientProfile.Designer.cs">
+      <DependentUpon>201905120732393_AddProgressToClientProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905111247354_LessonRequireChapter.resx">
       <DependentUpon>201905111247354_LessonRequireChapter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905120732393_AddProgressToClientProfile.resx">
+      <DependentUpon>201905120732393_AddProgressToClientProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
