@@ -12,8 +12,6 @@ namespace EasyHarmonica.WEB.Controllers
 {
     public class AccountController : Controller
     {
-        //private IUserService UserService => HttpContext.GetOwinContext().GetUserManager<IUserService>();
-
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private readonly IUserService UserService;
@@ -78,7 +76,8 @@ namespace EasyHarmonica.WEB.Controllers
                     Password = model.Password,
                     City = model.City,
                     Name = model.Name,
-                    Role = "User"
+                    Role = "User",
+                    BirthDay = model.BirthDay
                 };
                 await UserService.Create(userDto);
                 return RedirectToAction("GetChapters", "Chapter");

@@ -58,7 +58,7 @@ namespace EasyHarmonica.BLL.Services
                 await _database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 // создаем профиль клиента
                 ClientProfile clientProfile = new ClientProfile
-                    {Id = user.Id, Address = userDto.Email, City = userDto.City, Name = userDto.Name, BirthDay = DateTime.Now};
+                    {Id = user.Id, Address = userDto.Email, City = userDto.City, Name = userDto.Name, BirthDay = userDto.BirthDay, Registration = DateTime.Now};
                 _database.ClientProfiles.Create(clientProfile);
                 await _database.SaveAsync();
             }

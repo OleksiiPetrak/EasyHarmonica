@@ -71,9 +71,9 @@ namespace EasyHarmonica.DAL.Migrations
             context.SaveChanges();
 
             context.ClientProfiles.AddOrUpdate(x => x.Address,
-                new ClientProfile { Name = "Howard Levy", Address = "h.levy@mail.com", BirthDay = DateTime.Now.AddYears(-48), City = "LA", CourseComplexity = CourseComplexity.Hard, User = howardLevy },
-                new ClientProfile { Name = "Oleksii Petrak", Address = "petrak@mail.com", BirthDay = DateTime.Now.AddYears(-21), City = "Kharkiv", CourseComplexity = CourseComplexity.Middle, User = oleksiiPetrak },
-                new ClientProfile { Name = "Vasiliy Lomachenko", Address = "loma@mail.com", BirthDay = DateTime.Now.AddYears(-26), City = "Kyiv", CourseComplexity = CourseComplexity.Easy, User = lomachenko });
+                new ClientProfile { Name = "Howard Levy", Address = "h.levy@mail.com", BirthDay = DateTime.Now.AddYears(-48), City = "LA", CourseComplexity = CourseComplexity.Hard, User = howardLevy, Registration = DateTime.Now.AddDays(-15), Progress = 30 },
+                new ClientProfile { Name = "Oleksii Petrak", Address = "petrak@mail.com", BirthDay = DateTime.Now.AddYears(-21), City = "Kharkiv", CourseComplexity = CourseComplexity.Middle, User = oleksiiPetrak, Registration = DateTime.Now.AddDays(-30), Progress = 70 },
+                new ClientProfile { Name = "Vasiliy Lomachenko", Address = "loma@mail.com", BirthDay = DateTime.Now.AddYears(-26), City = "Kyiv", CourseComplexity = CourseComplexity.Easy, User = lomachenko, Registration = DateTime.Now.AddDays(-7), Progress = 15 });
 
             context.Notifications.AddOrUpdate(x => x.Date,
                 new Notification { Date = DateTime.Now.AddMinutes(15), Info = "Don't forget to practice!", Users = new List<User> { lomachenko } },

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System;
 
 namespace EasyHarmonica.WEB.Models
 {
@@ -9,8 +10,9 @@ namespace EasyHarmonica.WEB.Models
         public string Password { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public string City { get; set; }
         public string Role { get; set; }
+        public DateTime BirthDay { get; set; }
         public byte[] ImageData { get; set; }
 
         [HiddenInput(DisplayValue = false)]
