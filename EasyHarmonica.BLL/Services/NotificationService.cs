@@ -99,12 +99,15 @@ namespace EasyHarmonica.BLL.Services
 
         public async Task CheckForNotification(string email)
         {
-            var registrationDate = _database.ClientProfiles.GetOne(x => x.Address == email).RegistrationDate;
+            var registrationDate = _database.ClientProfiles.GetOne(x => x.Address == email).Registration;
             var currentDate = DateTime.Now;
             DateTime summaryDate;
             NotificationDTO notification = null;
 
             var lessonList = _database.Lessons.GetAll();
+
+            var user = await _database.UserManager.FindByEmailAsync(email);
+            var userDto = Mapper.Map<User, UserDTO>(user);
 
             foreach (var lesson in lessonList)
             {
@@ -115,9 +118,6 @@ namespace EasyHarmonica.BLL.Services
                 }
                 notification = new NotificationDTO { Date = DateTime.Now, Info = $"It's time to study lesson {lesson.Name}" };                                
             }
-
-            var user = await _database.UserManager.FindByEmailAsync(email);
-            var userDto = Mapper.Map<User, UserDTO>(user);
 
             if (notification == null)
             {
