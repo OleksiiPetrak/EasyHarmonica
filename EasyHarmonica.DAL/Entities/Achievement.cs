@@ -16,10 +16,6 @@ namespace EasyHarmonica.DAL.Entities
         [Index("IX_key", 1, IsUnique = true)]
         public string Name { get; set; }
 
-        public DateTime Date { get; set; }
-        public double PromotionPercentage { get; set; }
-        public bool Timeliness { get; set; }
-
         [ForeignKey("Lesson")]
         public int LessonId { get; set; }
         public virtual Lesson Lesson { get; set; }

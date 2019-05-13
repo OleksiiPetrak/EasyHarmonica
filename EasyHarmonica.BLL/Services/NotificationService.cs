@@ -55,6 +55,20 @@ namespace EasyHarmonica.BLL.Services
             return notificationDto;
         }
 
+        private bool CheckForNotificationExisting(string info)
+        {
+            Notification notification = _database.Notifications.GetOne(x => x.Info == info);
+
+            if (notification == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public async Task EditNotification(NotificationDTO notificationDto)
         {
             Notification checkNotification = _database.Notifications.GetOne(x => x.Id == notificationDto.Id);
@@ -81,6 +95,40 @@ namespace EasyHarmonica.BLL.Services
 
             _database.Notifications.Delete(notification);
             await _database.SaveAsync();
+        }
+
+        public async Task CheckForNotification(string email)
+        {
+            var registrationDate = _database.ClientProfiles.GetOne(x => x.Address == email).RegistrationDate;
+            var currentDate = DateTime.Now;
+            DateTime summaryDate;
+            NotificationDTO notification = null;
+
+            var lessonList = _database.Lessons.GetAll();
+
+            foreach (var lesson in lessonList)
+            {
+                summaryDate = registrationDate + lesson.Duration;
+                if (summaryDate > currentDate)
+                {
+                    break;
+                }
+                notification = new NotificationDTO { Date = DateTime.Now, Info = $"It's time to study lesson {lesson.Name}" };                                
+            }
+
+            var user = await _database.UserManager.FindByEmailAsync(email);
+            var userDto = Mapper.Map<User, UserDTO>(user);
+
+            if (notification == null)
+            {
+                notification = new NotificationDTO { Date = DateTime.Now, Info = "You are professional harper)", Users = {userDto} };
+            }
+
+            var checkNotification = CheckForNotificationExisting(notification.Info);
+            if (!checkNotification)
+            {
+                await CreateNotification(notification);
+            }
         }
     }
 }

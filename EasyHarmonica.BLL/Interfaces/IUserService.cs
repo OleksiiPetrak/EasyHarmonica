@@ -9,6 +9,7 @@ namespace EasyHarmonica.BLL.Interfaces
     {
         Task<IEnumerable<UserDTO>> GetAllUsers();
         Task<UserDTO> GetUser(string email);
+        Task ImproveUserData(string lessonName, string email);
         Task Create(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         Task SetInitialData(UserDTO adminDto, List<string> roles);

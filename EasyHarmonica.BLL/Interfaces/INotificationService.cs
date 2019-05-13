@@ -11,5 +11,6 @@ namespace EasyHarmonica.BLL.Interfaces
         NotificationDTO GetNotification(int id);
         Task EditNotification(NotificationDTO notificationDto);
         Task DeleteNotification(int id);
+        Task CheckForNotification(string email);
     }
 }

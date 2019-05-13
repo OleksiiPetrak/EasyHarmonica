@@ -13,17 +13,22 @@ namespace EasyHarmonica.WEB.Controllers
     {
         private readonly IChapterService _chapterService;
         private readonly ILessonService _lessonService;
+        private readonly INotificationService _notificationService;
 
-        public ChapterController(IChapterService chapterService, ILessonService lessonService)
+
+        public ChapterController(IChapterService chapterService, ILessonService lessonService, INotificationService notificationService)
         {
             _chapterService = chapterService;
             _lessonService = lessonService;
+            _notificationService = notificationService;
         }
 
-        public ActionResult GetChapters()
+        public async Task<ActionResult> GetChapters()
         {
             if (User.Identity.IsAuthenticated)
             {
+                var email = User.Identity.Name;
+
                 var chaptersDto = _chapterService.GetAllChapters();
                 var chaptersModel = Mapper.Map<IEnumerable<ChapterDTO>, IEnumerable<ChapterModel>>(chaptersDto);
 
@@ -31,6 +36,8 @@ namespace EasyHarmonica.WEB.Controllers
                 var lessonsModel = Mapper.Map<IEnumerable<LessonDTO>, IEnumerable<LessonModel>>(lessonsDto);
 
                 var startModel = new StartViewModel() { Chapters = chaptersModel, Lessons = lessonsModel };
+
+                await _notificationService.CheckForNotification(email);
 
                 return View(startModel);
             }

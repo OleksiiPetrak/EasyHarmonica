@@ -120,6 +120,14 @@
     <Compile Include="Migrations\201905120732393_AddProgressToClientProfile.Designer.cs">
       <DependentUpon>201905120732393_AddProgressToClientProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905131045357_AddDatesForLessonsAndClients.cs" />
+    <Compile Include="Migrations\201905131045357_AddDatesForLessonsAndClients.Designer.cs">
+      <DependentUpon>201905131045357_AddDatesForLessonsAndClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905131248176_SimplifyAchievement.cs" />
+    <Compile Include="Migrations\201905131248176_SimplifyAchievement.Designer.cs">
+      <DependentUpon>201905131248176_SimplifyAchievement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modules\DataAccessModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -151,6 +159,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905120732393_AddProgressToClientProfile.resx">
       <DependentUpon>201905120732393_AddProgressToClientProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131045357_AddDatesForLessonsAndClients.resx">
+      <DependentUpon>201905131045357_AddDatesForLessonsAndClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905131248176_SimplifyAchievement.resx">
+      <DependentUpon>201905131248176_SimplifyAchievement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

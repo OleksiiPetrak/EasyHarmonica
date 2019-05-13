@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EasyHarmonica.BLL.DTO
@@ -17,5 +18,10 @@ namespace EasyHarmonica.BLL.DTO
 
         [HiddenInput(DisplayValue = false)]
         public string ImageMimeType { get; set; }
+
+        public ClientProfileDTO ClientProfile { get; set; }
+        public virtual ICollection<NotificationDTO> Notifications { get; set; }
+        public virtual ICollection<AchievementDTO> Achievements { get; set; }
+        public virtual ICollection<LessonDTO> Lessons { get; set; }
     }
 }

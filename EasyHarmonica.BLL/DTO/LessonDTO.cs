@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EasyHarmonica.BLL.DTO
@@ -10,6 +11,7 @@ namespace EasyHarmonica.BLL.DTO
 
         public string Info { get; set; }
         public string Tuner { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public byte[] ImageData { get; set; }
 
