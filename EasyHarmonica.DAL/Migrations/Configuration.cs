@@ -100,7 +100,8 @@ namespace EasyHarmonica.DAL.Migrations
                     Info = "Make your choice",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
                     Chapter = startChapter,
-                    Users = new List<User> { lomachenko }
+                    Users = new List<User> { lomachenko },
+                    Duration = new TimeSpan(0,0,0,0)
                 },
                 new Lesson
                 {
@@ -108,7 +109,8 @@ namespace EasyHarmonica.DAL.Migrations
                     Info = "You should to practicing more",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
                     Chapter = startChapter,
-                    Users = new List<User> { lomachenko }
+                    Users = new List<User> { lomachenko },
+                    Duration = new TimeSpan(1, 0, 0, 0)
                 },
                 new Lesson
                 {
@@ -116,17 +118,19 @@ namespace EasyHarmonica.DAL.Migrations
                     Info = "You need just take several wholes",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
                     Chapter = startChapter,
-                    Users = new List<User> { lomachenko }
+                    Users = new List<User> { lomachenko },
+                    Duration = new TimeSpan(8, 0, 0, 0)
                 });
 
             context.SaveChanges();
 
             var clearNote = context.Lessons.FirstOrDefault(x => x.Name == "How to take clear note");
+            var accord = context.Lessons.FirstOrDefault(x => x.Name == "How to play an accords");
 
             context.Achievements.AddOrUpdate(x => x.Name,
-                new Achievement { Name = "Fast learner", Date = DateTime.Now, PromotionPercentage = 12.0, Timeliness = true, Users = new List<User> { lomachenko }, LessonId = clearNote.Id },
-                new Achievement { Name = "Talent!", Date = DateTime.Now, PromotionPercentage = 12.5, Timeliness = true, Users = new List<User> { lomachenko }, LessonId = clearNote.Id },
-                new Achievement { Name = "All in time", Date = DateTime.Now, PromotionPercentage = 13.0, Timeliness = true, Users = new List<User> { lomachenko }, LessonId = clearNote.Id });
+                new Achievement { Name = "Fast learner", Users = new List<User> { lomachenko }, LessonId = clearNote.Id },
+                new Achievement { Name = "Talent!", Users = new List<User> { lomachenko }, LessonId = accord.Id },
+                new Achievement { Name = "All in time", Users = new List<User> { lomachenko }, LessonId = accord.Id });
         }
     }
 }

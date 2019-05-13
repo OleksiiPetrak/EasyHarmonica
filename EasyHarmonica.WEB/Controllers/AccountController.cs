@@ -78,7 +78,8 @@ namespace EasyHarmonica.WEB.Controllers
                     Password = model.Password,
                     City = model.City,
                     Name = model.Name,
-                    Role = "User"
+                    Role = "User",
+                    BirthDay = model.BirthDay
                 };
                 await UserService.Create(userDto);
                 return RedirectToAction("GetChapters", "Chapter");

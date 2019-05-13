@@ -45,6 +45,44 @@ namespace EasyHarmonica.BLL.Services
             return result;
         }
 
+        public async Task ImproveUserData(string lessonName, string email)
+        {
+            var lessonsCount = _database.Lessons.GetAll().Count();
+            double percent = 100 / lessonsCount;
+
+            var clientProfile = _database.ClientProfiles.GetOne(x => x.Address == email);
+
+            if (clientProfile == null)
+            {
+                throw new ArgumentNullException($"Profile with such email does not exist. Id{email}");
+            }
+
+            clientProfile.Progress += percent;
+            _database.ClientProfiles.Update(clientProfile);
+            await _database.SaveAsync().ConfigureAwait(false);
+
+            var user = await _database.UserManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new ArgumentNullException($"User with email {email} does not exist");
+            }
+
+            var lesson = _database.Lessons.GetOne(x => x.Name == lessonName);
+
+            lesson.Users.Add(user);
+
+            _database.Lessons.Update(lesson);
+            await _database.SaveAsync().ConfigureAwait(false);
+
+            foreach (var achievement in lesson.Achievements)
+            {
+                achievement.Users.Add(user);
+                _database.Achievements.Update(achievement);
+            }
+  
+            await _database.SaveAsync().ConfigureAwait(false);
+        }
+
         public async Task Create(UserDTO userDto)
         {
             User user = await _database.UserManager.FindByEmailAsync(userDto.Email);
@@ -58,7 +96,7 @@ namespace EasyHarmonica.BLL.Services
                 await _database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 // создаем профиль клиента
                 ClientProfile clientProfile = new ClientProfile
-                    {Id = user.Id, Address = userDto.Email, City = userDto.City, Name = userDto.Name, BirthDay = DateTime.Now};
+                    {Id = user.Id, Address = userDto.Email, City = userDto.City, Name = userDto.Name, BirthDay = userDto.BirthDay, RegistrationDate = DateTime.Now};
                 _database.ClientProfiles.Create(clientProfile);
                 await _database.SaveAsync();
             }

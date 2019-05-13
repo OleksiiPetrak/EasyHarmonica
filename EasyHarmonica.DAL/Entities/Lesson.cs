@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
@@ -18,6 +19,8 @@ namespace EasyHarmonica.DAL.Entities
 
         public string Info { get; set; }
         public string Tuner { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public byte[] ImageData { get; set; }
 

@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 
 namespace EasyHarmonica.BLL.Services
 {
@@ -102,11 +101,6 @@ namespace EasyHarmonica.BLL.Services
             _database.Lessons.Delete(lesson);
             await _database.SaveAsync();
         }
-
-        public int GetLessonsCount()
-        {
-            var count = _database.Lessons.GetAll().Count();
-            return count;
-        }
+        
     }
 }

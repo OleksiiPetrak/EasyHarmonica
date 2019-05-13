@@ -22,6 +22,8 @@ namespace EasyHarmonica.DAL.Entities
 
         public double Progress { get; set; }
 
+        public DateTime RegistrationDate { get; set; }
+
         public CourseComplexity CourseComplexity { get; set; }
 
         public byte[] ImageData { get; set; }

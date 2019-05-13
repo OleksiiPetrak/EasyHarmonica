@@ -12,6 +12,5 @@ namespace EasyHarmonica.BLL.Interfaces
         string GetNextLessonName(int id);
         Task EditLesson(LessonDTO lessonDto);
         Task DeleteLesson(int id);
-        int GetLessonsCount();
     }
 }

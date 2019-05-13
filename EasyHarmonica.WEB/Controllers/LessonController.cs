@@ -49,15 +49,9 @@ namespace EasyHarmonica.WEB.Controllers
         [HttpPost]
         public async Task<ActionResult> GetLesson(LessonModel model)
         {
-            var lessonsCount = _lessonService.GetLessonsCount();
-            double percent = 100 / lessonsCount;
-
-            var  email = User.Identity.Name;
-            var clientProfileDto = _clientProfileService.GetClientProfile(email);
-            clientProfileDto.Progress += percent;
-
-            await _clientProfileService.EditClientProfile(clientProfileDto).ConfigureAwait(false);
-
+            var email = User.Identity.Name;
+            await _userService.ImproveUserData(model.Name, email);
+            
             return RedirectToAction("GetNextLessonName", new { id = model.Id });
         }
 
