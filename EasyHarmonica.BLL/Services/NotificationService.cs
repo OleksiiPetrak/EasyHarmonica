@@ -107,7 +107,6 @@ namespace EasyHarmonica.BLL.Services
             var lessonList = _database.Lessons.GetAll();
 
             var user = await _database.UserManager.FindByEmailAsync(email);
-            var userDto = Mapper.Map<User, UserDTO>(user);
 
             foreach (var lesson in lessonList)
             {
@@ -116,18 +115,23 @@ namespace EasyHarmonica.BLL.Services
                 {
                     break;
                 }
+
                 notification = new NotificationDTO { Date = DateTime.Now, Info = $"It's time to study lesson {lesson.Name}" };                                
             }
 
             if (notification == null)
             {
-                notification = new NotificationDTO { Date = DateTime.Now, Info = "You are professional harper)", Users = {userDto} };
+                notification = new NotificationDTO { Date = DateTime.Now, Info = "You are professional harper)"};
             }
 
             var checkNotification = CheckForNotificationExisting(notification.Info);
             if (!checkNotification)
             {
                 await CreateNotification(notification);
+                var currentNotification = _database.Notifications.GetOne(x => x.Info == notification.Info);
+                currentNotification.Users.Add(user);
+                _database.Notifications.Update(currentNotification);
+                await _database.SaveAsync();
             }
         }
     }

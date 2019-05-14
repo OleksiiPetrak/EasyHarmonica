@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using EasyHarmonica.WEB.Models;
+using AutoMapper;
+using System;
 
 namespace EasyHarmonica.WEB.Controllers
 {
@@ -14,11 +16,11 @@ namespace EasyHarmonica.WEB.Controllers
     {
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
-        private readonly IUserService UserService;
+        private readonly IUserService _userService;
 
         public AccountController(IUserService userService)
         {
-            UserService = userService;
+            _userService = userService;
         }
 
         public ViewResult Login()
@@ -34,7 +36,7 @@ namespace EasyHarmonica.WEB.Controllers
             if (ModelState.IsValid)
             {
                 UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
-                ClaimsIdentity claim = await UserService.Authenticate(userDto);
+                ClaimsIdentity claim = await _userService.Authenticate(userDto);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль.");
@@ -79,16 +81,27 @@ namespace EasyHarmonica.WEB.Controllers
                     Role = "User",
                     BirthDay = model.BirthDay
                 };
-                await UserService.Create(userDto);
+                await _userService.Create(userDto);
                 return RedirectToAction("GetChapters", "Chapter");
             }
             return View(model);
         }
 
+        public async Task<ViewResult> GetUserInfo()
+        {
+            var email = User.Identity.Name;
+            var userDto = await _userService.GetUser(email);
+            if(userDto == null)
+            {
+                throw new ArgumentNullException();
+            }
+            var model = Mapper.Map<UserDTO, UserModel>(userDto);
+            return View(model);
+        }
 
         private async Task SetInitialDataAsync()
         {
-            await UserService.SetInitialData(new UserDTO
+            await _userService.SetInitialData(new UserDTO
             {
                 Email = "somemail@mail.ru",
                 UserName = "somemail@mail.ru",
