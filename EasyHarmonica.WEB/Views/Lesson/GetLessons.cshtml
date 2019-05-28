@@ -1,18 +1,78 @@
 ﻿@model EasyHarmonica.WEB.Models.StartViewModel
 
+
+<!-- ***** Out team + portraits ***** -->
+
+<h3>Chapters</h3>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about him</span>
+    </h4>
+    <a href="#"><img src="img/team_member1.jpg" alt="team1"></a>
+    <a href="#" class="profession">developer</a>
+</div>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about it</span>
+    </h4>
+    <a href="#"><img src="img/team_member2.jpg" alt="team2"></a>
+    <a href="#" class="profession">pussy</a>
+</div>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about him</span>
+    </h4>
+    <a href="#"><img src="img/team_member3.jpg" alt="team3"></a>
+    <a href="#" class="profession">the boss</a>
+</div>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about her</span>
+    </h4>
+    <a href="#"><img src="img/team_member4.jpg" alt="team4"></a>
+    <a href="#" class="profession">designer</a>
+</div>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about him</span>
+    </h4>
+    <a href="#"><img src="img/team_member5.jpg" alt="team5"></a>
+    <a href="#" class="profession">copywriter</a>
+</div>
+
+<div class="sixths_team">
+    <h4>
+        Find out more<br>
+        <span>about her</span>
+    </h4>
+    <a href="#"><img src="img/team_member6.jpg" alt="team6"></a>
+    <a href="#" class="profession">marketer</a>
+</div>
+
+<hr class="cleanit">
 <table>
-@foreach (var lesson in Model.Lessons)
-{
-    <tr>
-        <td>
-            @Html.ActionLink(lesson.Name, "GetLesson", "Lesson", new { name = lesson.Name }, null)
-        </td>
-        <td>
-            @Html.DisplayFor(item=>lesson.Info)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditLesson", "Lesson", new{name = lesson.Name}, null)
-        </td>
-    </tr>
-}
+    @foreach (var lesson in Model.Lessons)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(lesson.Name, "GetLesson", "Lesson", new { name = lesson.Name }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(item => lesson.Info)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditLesson", "Lesson", new { name = lesson.Name }, null)
+            </td>
+        </tr>
+    }
 </table>

@@ -4,24 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Easy Harmonica</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/Images/MyStyle.css" rel="stylesheet">
+    <link href="~/Content/reset.css" rel="stylesheet">
+    <link href="~/Content/styl.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    @*@Styles.Render("~/Content/css")*@
+        @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Easy harmonica", "GetChapters", "Chapter", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Profile", "GetUserInfo", "ClientProfile", new {email = User.Identity.Name}, null)</li>
+    <div id="header">
+        <div id="header_in">
+
+            <h1><b>Easy</b> Harmonica</h1>
+
+            <div id="menu">
+                <ul>
+                    <li>@Html.ActionLink("Lessons", "GetChapters", "Chapter", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Profile", "GetUserInfo", "ClientProfile", new { email = User.Identity.Name }, null)</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
@@ -30,17 +34,64 @@
                     {
                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     }
+                    @*<li><a href="contact.html" class="active">Contact</a></li>*@
                 </ul>
             </div>
+
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Easy Harmonica</p>
-        </footer>
-    </div>
+
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Easy harmonica", "GetChapters", "Chapter", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Profile", "GetUserInfo", "ClientProfile", new {email = User.Identity.Name}, null)</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+    @RenderBody()
+
+    <hr class="cleanit">
+
+    
+        <div id="footer" style="background-image: url('../../Content/Images/bg_footer.jpg');">
+            <div id="footer_in">
+                <hr />
+                <footer>
+                    <p><a href="http://creativecommons.org/licenses/by/3.0/"> Easy Harmonica </a> &mdash; 2019</p>
+                </footer>
+            </div>
+        </div>
+    
+
+    @*<div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Easy Harmonica</p>
+            </footer>
+        </div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

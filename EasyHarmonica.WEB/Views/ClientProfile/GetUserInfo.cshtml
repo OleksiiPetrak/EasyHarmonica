@@ -4,58 +4,101 @@
     ViewBag.Title = "GetUserInfo";
 }
 
-<h2>GetUserInfo</h2>
+    <div id="main_part_inner" style="background-image: url('../../Content/Images/main_img_1.jpg'); margin: auto">
+        <div id="main_part_inner_in">
 
-<div>
-    @if (Model.ImageData != null)
-    {
-        <div style="margin-right: 20px">
-            <img width="150" height="150" src="@Url.Action("GetImage", "ClientProfile", new {email = User.Identity.Name})"/>
+            <div style="float:left; margin-right: 58%"> <h2>@Html.DisplayFor(model => model.Name)</h2></div>
+            <div style="float:left; margin-right: 2%"> <h2>@Html.DisplayNameFor(model => model.Progress):</h2> </div>
+            <div style="float:left;"> <h2>@Html.DisplayFor(model => model.Progress)</h2></div>
+            <div><h2>@Html.DisplayName("%")</h2></div>
         </div>
-    }
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div style="float:left; margin-left: 20%">
+        <div id="content_inner">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+            @if (Model.ImageData != null)
+            {
+                <div style="margin-right: 20px;">
+                    @*<img width="150" height="150" src="@Url.Action("GetImage", "ClientProfile", new {email = User.Identity.Name})" />*@
+                    <img width="200" height="200" src="~/Content/Images/team_member5.jpg" style="float: left; margin-right: 5%" />
+                </div>
+            }
+            <hr />
+            <div style="margin: 1%">
+                <b>Name: </b> @Model.Name
+            </div>
+            <div style="margin: 1%">
+                <b>Email: </b> @Model.Address
+            </div>
+            <div style="margin: 1%">
+                <b>BirthDay: </b> @Model.BirthDay
+            </div>
+            <div style="margin: 1%">
+                <b>City: </b> @Model.City
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+            <br />
+            <p>
+                @Html.ActionLink("Edit", "EditUserInfo", new { email = User.Identity.Name })
+            </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDay)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BirthDay)
-        </dd>
+        </div>
+        <hr />
+        <div class="testimonials">
+            <div class="quote"><b> Achievements </b></div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
+            <div class="quote" style="overflow:hidden">
+                <img width="70" height="50" src="~/Content/Images/achievement_picture1.jpg" style="float: left; margin-right: 5%" />
+                <div style="margin-bottom:5%"> Benrd on the 3rd whole. Essentials </div>
+                <div> Progress: 66% </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
+            <div class="quote" style="overflow:hidden">
+                <img width="70" height="50" src="~/Content/Images/achievement_picture1.jpg"  style="float: left; margin-right: 5%" />
+                <div style="margin-bottom:5%"> Bend on the 1st whole. Essentials </div>
+                <div> Progress: 59% </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Progress)
-        </dt>
+            <div class="quote" style="overflow:hidden">
+                <img width="70" height="50" src="~/Content/Images/achievement_picture1.jpg"  style="float: left; margin-right: 5%" />
+                <div style="margin-bottom:5%">  Bend on the 6th whole. Essentials </div>
+                <div> Progress: 54% </div>
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Progress)
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "EditUserInfo", new { email = User.Identity.Name }) 
-</p>
+    <div class="testimonials">
+        <div class="quote"><b>Your current task: </b> Bend on 3rd whole</div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member1.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Huan-Karlo Martinez </div>
+            <div> Progress: 15% </div>
+        </div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member3.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Franco Huesca </div>
+            <div> Progress: 25% </div>
+        </div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member4.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Anna Karenica </div>
+            <div> Progress: 7% </div>
+        </div>
+
+        <div class="quote">“…Playing an extended solo that somehow merged quasi- baroque techniques with swing rhythms, snippets of hokey holiday tunes with passages of brilliant jazz improvisation, Levy unleashed more ideas in this opening solo than many musicians do in an entire set.”.</div>
+        <span class="testimonials_bottom"></span>
+
+        <ul class="controls">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+        <span class="by">Howard Levy</span>
+    </div>
+    
+
