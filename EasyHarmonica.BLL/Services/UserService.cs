@@ -86,10 +86,18 @@ namespace EasyHarmonica.BLL.Services
         public async Task Create(UserDTO userDto)
         {
             User user = await _database.UserManager.FindByEmailAsync(userDto.Email);
+            Role role = await _database.RoleManager.FindByNameAsync("User");
             if (user == null)
             {
                 user = new User { Email = userDto.Email, UserName = userDto.Email };
                 var result = await _database.UserManager.CreateAsync(user, userDto.Password);
+
+                if(role==null)
+                {
+                    await _database.RoleManager.CreateAsync(role);
+                    await _database.SaveAsync();
+                }
+                
                 if (result.Errors.Count() > 0)
                     throw new Exception($"User with email {userDto.Email} didn't create");
                 // добавляем роль
