@@ -7,6 +7,7 @@ namespace EasyHarmonica.DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
+    using System.Diagnostics;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<EF.EasyHarmonicaContext>
@@ -137,7 +138,7 @@ namespace EasyHarmonica.DAL.Migrations
 
                     Chromatic harmonic harmonics - on the contrary, they have all the sounds of the chromatic scale.On chromatic lip harmonicas, as a rule, you can play complex classical works, jazz music, and here you need to have a good musical education, read notes “from the sheet” and have good training in diatonic harmonica.Almost all harmonics playing on chromatic lip harmonics, starting with diatonic harmonics, as well as some of them and skills, such as beautiful vibrato or bends(which theoretically cannot be done on chromatic lip harmonics, which are usually practiced constantly) can be fine - tuned.on the diatonic harmonica, without damaging the instrument tongues.",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
-                    Chapter = startChapter,
+                    ChapterId = startChapter.Id,
                     Users = new List<User> { lomachenko },
                     Duration = new TimeSpan(0,0,0,0)
                 },
@@ -195,9 +196,9 @@ The task:
 Play the melody you learned very slowly with long notes, outputting every note from quiet to loud, focusing attention on the correct implementation of the three basic rules.
 ",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
-                    Chapter = startChapter,
+                    ChapterId = startChapter.Id,
                     Users = new List<User> { lomachenko },
-                    Duration = new TimeSpan(1, 0, 0, 0)
+                    Duration = new TimeSpan(0, 23, 0, 0)
                 },
                 new Lesson
                 {
@@ -258,20 +259,21 @@ All other bands: on the fourth, second and third holes - is a combination of the
 At the third opening of the harmonica, you can lower the note by three semitones. For many, this is the most difficult bend hole. In addition, after you learn to smoothly lower the note to the very bottom, you will need to learn how to take intermediate bends on the third opening of the harmonica.
 ",
                     Tuner = "http://modusmusic.ru/info/hromaticheskiy-tyuner-dlja-nastrojki-muzykalnyh-instrumentov/",
-                    Chapter = startChapter,
+                    ChapterId = startChapter.Id,
                     Users = new List<User> { lomachenko },
-                    Duration = new TimeSpan(8, 0, 0, 0)
+                    Duration = new TimeSpan(0, 15, 0, 0)
                 });
 
             context.SaveChanges();
 
-            var clearNote = context.Lessons.FirstOrDefault(x => x.Name == "How to take clear note");
-            var accord = context.Lessons.FirstOrDefault(x => x.Name == "How to play an accords");
+            var clearNote = context.Lessons.First(x => x.Name == "How to take clear note");
+            var accord = context.Lessons.First(x => x.Name == "How to play bends");
 
             context.Achievements.AddOrUpdate(x => x.Name,
                 new Achievement { Name = "Fast learner", Users = new List<User> { lomachenko }, LessonId = clearNote.Id },
                 new Achievement { Name = "Talent!", Users = new List<User> { lomachenko }, LessonId = accord.Id },
                 new Achievement { Name = "All in time", Users = new List<User> { lomachenko }, LessonId = accord.Id });
+
         }
     }
 }
