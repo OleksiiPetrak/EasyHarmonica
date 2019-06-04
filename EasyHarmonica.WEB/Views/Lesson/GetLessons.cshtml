@@ -2,77 +2,97 @@
 
 
 <!-- ***** Out team + portraits ***** -->
+    <div id="content_inner" style="float:left; margin-left: 20%">
+        <div style="float:none">
+            <div class="sixths_team">
+                <h4>
+                    Beginner<br>
+                    <span>learn more</span>
+                </h4>
+                <a href="#"><img width="140" height="160" src="~/Content/Images/beginner.jpg" alt="team1"></a>
+            </div>
 
-<h3>Chapters</h3>
+            <div class="sixths_team">
+                <h4>
+                    Main knowladge<br>
+                    <span>learn more</span>
+                </h4>
+                <a href="#"><img width="140" height="160" src="~/Content/Images/middle.jpg" alt="team2"></a>
+            </div>
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about him</span>
-    </h4>
-    <a href="#"><img src="img/team_member1.jpg" alt="team1"></a>
-    <a href="#" class="profession">developer</a>
-</div>
+            <div class="sixths_team">
+                <h4>
+                    Blues<br>
+                    <span>learn more</span>
+                </h4>
+                <a href="#"><img width="140" height="160" src="~/Content/Images/blues.jpg" alt="team3"></a>
+            </div>
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about it</span>
-    </h4>
-    <a href="#"><img src="img/team_member2.jpg" alt="team2"></a>
-    <a href="#" class="profession">pussy</a>
-</div>
+            <div class="sixths_team">
+                <h4>
+                    Songs<br>
+                    <span>learn more</span>
+                </h4>
+                <a href="#"><img width="140" height="160" src="~/Content/Images/songs.jpg" alt="team4"></a>
+            </div>
+        </div>
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about him</span>
-    </h4>
-    <a href="#"><img src="img/team_member3.jpg" alt="team3"></a>
-    <a href="#" class="profession">the boss</a>
-</div>
+        <!-- ***** lessons' least ***** -->
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about her</span>
-    </h4>
-    <a href="#"><img src="img/team_member4.jpg" alt="team4"></a>
-    <a href="#" class="profession">designer</a>
-</div>
+        <hr class="cleanit">
+        <div id="content">
+            <table width="650">
+                @foreach (var lesson in Model.Lessons)
+                {
+                    string info = lesson.Info.Substring(0, 200);
+                    <tr>
+                        <td>
+                            @Html.ActionLink(lesson.Name, "GetLesson", "Lesson", new { name = lesson.Name }, null)
+                        </td>
+                        <td width="500">
+                            @Html.DisplayFor(item => info)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditLesson", "Lesson", new { name = lesson.Name }, null)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about him</span>
-    </h4>
-    <a href="#"><img src="img/team_member5.jpg" alt="team5"></a>
-    <a href="#" class="profession">copywriter</a>
-</div>
+    </div>
 
-<div class="sixths_team">
-    <h4>
-        Find out more<br>
-        <span>about her</span>
-    </h4>
-    <a href="#"><img src="img/team_member6.jpg" alt="team6"></a>
-    <a href="#" class="profession">marketer</a>
-</div>
 
-<hr class="cleanit">
-<table>
-    @foreach (var lesson in Model.Lessons)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(lesson.Name, "GetLesson", "Lesson", new { name = lesson.Name }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(item => lesson.Info)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditLesson", "Lesson", new { name = lesson.Name }, null)
-            </td>
-        </tr>
-    }
-</table>
+
+
+<div class="testimonials">
+        <div class="quote"><b>Your current task: </b> Bend on 3rd whole</div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member1.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Huan-Karlo Martinez </div>
+            <div> Progress: 15% </div>
+        </div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member3.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Franco Huesca </div>
+            <div> Progress: 25% </div>
+        </div>
+
+        <div class="quote" style="overflow:hidden">
+            <img width="60" height="60" src="~/Content/Images/team_member4.jpg" style="float: left; margin-right: 5%" />
+            <div style="margin-bottom:5%"> Anna Karenica </div>
+            <div> Progress: 7% </div>
+        </div>
+
+        <div class="quote">“…Playing an extended solo that somehow merged quasi- baroque techniques with swing rhythms, snippets of hokey holiday tunes with passages of brilliant jazz improvisation, Levy unleashed more ideas in this opening solo than many musicians do in an entire set.”.</div>
+        <span class="testimonials_bottom"></span>
+
+        <ul class="controls">
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+        <span class="by">Howard Levy</span>
+    </div>

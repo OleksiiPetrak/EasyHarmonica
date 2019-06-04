@@ -5,7 +5,14 @@
     ViewBag.Title = "GetChapters";
 }
 
-<h2>It's time to music!</h2>
+    <div id="main_part_inner" style="background-image: url('../../Content/Images/main_img_1.jpg');">
+        <div id="main_part_inner_in">
+
+            <h2>@Html.DisplayName("Info")</h2>
+        </div>
+    </div>
+
+@*<h2>It's time to music!</h2>
 
 <div>
     @foreach (var chapter in Model.Chapters)
@@ -17,7 +24,7 @@
                 @Html.ActionLink("Edit", "EditChapter", "Chapter", new { chapterName = chapter.Name }, null)
         </span>
     }
-</div>
+</div>*@
 
 <hr/>
 

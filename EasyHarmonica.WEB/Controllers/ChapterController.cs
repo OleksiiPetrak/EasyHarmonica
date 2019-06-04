@@ -46,6 +46,22 @@ namespace EasyHarmonica.WEB.Controllers
         }
 
         [HttpGet]
+        public ViewResult GetChapter(string chapterName)
+        {
+            var chaptersDto = _chapterService.GetAllChapters();
+            var chaptersModel = Mapper.Map<IEnumerable<ChapterDTO>, IEnumerable<ChapterModel>>(chaptersDto);
+
+            var chapterDto = _chapterService.GetChapter(chapterName);
+            var chapterModel = Mapper.Map<ChapterDTO, ChapterModel>(chapterDto);
+
+            var lessonsModel = chapterModel.Lessons;
+
+            var startModel = new StartViewModel() { Chapters = chaptersModel, Lessons = lessonsModel };
+
+            return View(startModel);
+        }
+
+        [HttpGet]
         public ViewResult EditChapter(string chapterName)
         {
             var chapterDto = _chapterService.GetChapter(chapterName);

@@ -200,9 +200,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\achievement_picture1.jpg" />
     <Content Include="Content\Images\banner1.jpg" />
+    <Content Include="Content\Images\beginner.jpg" />
     <Content Include="Content\Images\bg_footer.jpg" />
+    <Content Include="Content\Images\blues.jpg" />
     <Content Include="Content\Images\main_img_1.jpg" />
     <Content Include="Content\Images\menu_cut.jpg" />
+    <Content Include="Content\Images\middle.jpg" />
     <Content Include="Content\Images\MyStyle.css" />
     <Content Include="Content\Images\portfolio1.jpg" />
     <Content Include="Content\Images\portfolio2.jpg" />
@@ -213,6 +216,7 @@
     <Content Include="Content\Images\portfolio7.jpg" />
     <Content Include="Content\Images\portfolio8.jpg" />
     <Content Include="Content\Images\quote_bottom.jpg" />
+    <Content Include="Content\Images\songs.jpg" />
     <Content Include="Content\Images\team_member1.jpg" />
     <Content Include="Content\Images\team_member2.jpg" />
     <Content Include="Content\Images\team_member3.jpg" />
