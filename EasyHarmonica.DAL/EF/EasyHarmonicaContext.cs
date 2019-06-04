@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using EasyHarmonica.DAL.Entities;
+using EasyHarmonica.DAL.Migrations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EasyHarmonica.DAL.EF
@@ -15,6 +16,7 @@ namespace EasyHarmonica.DAL.EF
         public EasyHarmonicaContext():base("EasyHarmonicaConnection")
         {
             var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EasyHarmonicaContext, Configuration>());
         }
     }
 }
